@@ -1,9 +1,9 @@
 <?php namespace Zizaco\ConfideMongo;
 
-use MongolidLaravel\MongolidModel;
+use Mongolid\Laravel\AbstractModel;
 use Zizaco\Confide\ConfideUserInterface;
 
-class ConfideMongoUser extends MongolidModel implements ConfideUserInterface
+class ConfideMongoUser extends AbstractModel implements ConfideUserInterface
 {
     /**
      * The database collection used by the model.
@@ -135,10 +135,8 @@ class ConfideMongoUser extends MongolidModel implements ConfideUserInterface
 
     /**
      * Overwrites MongoLid isValid method in order to check for duplicates
-     *
-     * @return bool Is Valid?
      */
-    public function isValid()
+    public function isValid(): bool
     {
         if (parent::isValid()) {
             $duplicated = false;
@@ -165,10 +163,8 @@ class ConfideMongoUser extends MongolidModel implements ConfideUserInterface
      * afterSave() methods.
      *
      * @param bool $force Force save even if the object is invalid
-     *
-     * @return bool
      */
-    public function save(bool $force = false)
+    public function save(bool $force = false): bool
     {
         $this->beforeSave($force);
 
